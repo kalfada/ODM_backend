@@ -1,6 +1,13 @@
 const users = require('./controllers/userController')
 
 module.exports = app => {
+    app.get('/', async (req, res) => {
+        try {
+            res.send('working')
+        } catch (err) {
+            res.send({ code: 400, message: err.message || err })
+        }
+    }),
     app.get('/users', async (req, res) => {
         try {
             res.send(await users.read())
